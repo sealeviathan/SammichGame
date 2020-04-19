@@ -1,4 +1,4 @@
-import sys, pygame
+import sys, pygame, ingredient
 
 if __name__ == "__main__":
     # Basic initialization.
@@ -16,21 +16,33 @@ if __name__ == "__main__":
     black = 0, 0, 0
 
     # Groups for the sprites to fall into for mass updating.
-    G_Background = pygame.sprite.Group()
     G_All = pygame.sprite.Group()
+    G_Background = pygame.sprite.Group()
     G_Player = pygame.sprite.Group()
     G_Enemies = pygame.sprite.Group()
     G_Neutral = pygame.sprite.Group()
     # add more groups here as needed.
+
+    # Load resources
+    try:
+        breadresouce = pygame.image.load("../Images/bread.png")
+    except Exception as error:
+        print(error)
+        pygame.quit()
+        sys.exit()
+
+    BreadTest = ingredient.Ingredient(breadresouce)
+
 
     # Be very careful when adding things into this loop! This is the main run loop (limited by FPS).
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+                pygame.quit()
                 sys.exit()
 
         viewport.fill(black)
-
+        G_All.draw(viewport)
         pygame.display.flip()
         FPSClock.tick(FPS)
