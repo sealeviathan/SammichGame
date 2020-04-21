@@ -13,10 +13,11 @@ if __name__ == "__main__":
     dimensions = (width, height)
 
     viewport = pygame.display.set_mode(dimensions)
-    black = 0, 0, 0
+    black = (0, 0, 0)
 
     # Groups for the sprites to fall into for mass updating.
     G_All = pygame.sprite.Group()
+    G_Clicked = pygame.sprite.Group()
     G_Background = pygame.sprite.Group()
     G_Player = pygame.sprite.Group()
     G_Enemies = pygame.sprite.Group()
@@ -31,7 +32,7 @@ if __name__ == "__main__":
         pygame.quit()
         sys.exit()
 
-    BreadTest = ingredient.Ingredient(breadresouce)
+    BreadTest = ingredient.Ingredient(breadresouce, G_All)
 
 
     # Be very careful when adding things into this loop! This is the main run loop (limited by FPS).
@@ -41,6 +42,9 @@ if __name__ == "__main__":
                 running = False
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                a = pygame.Rect.collidepoint(event.pos)
+
 
         viewport.fill(black)
         G_All.draw(viewport)
