@@ -9,3 +9,6 @@ class Ingredient(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.width, self.height = self.image.get_size()
         self.add(*groups)
+
+    def handleclick(self):
+        print(f'Clicked {self}')
