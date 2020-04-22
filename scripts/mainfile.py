@@ -8,8 +8,8 @@ if __name__ == "__main__":
     FPS = 30
     FPSClock = pygame.time.Clock()
 
-    width = 640
-    height = 480
+    width = 960
+    height = 540
     dimensions = (width, height)
 
     viewport = pygame.display.set_mode(dimensions)
@@ -33,7 +33,7 @@ if __name__ == "__main__":
         sys.exit()
 
     BreadTest = ingredient.Ingredient(breadresouce, G_All)
-
+    BreadTest2 = ingredient.Ingredient(breadresouce, G_All)
 
     # Be very careful when adding things into this loop! This is the main run loop (limited by FPS).
     while running:
@@ -43,7 +43,9 @@ if __name__ == "__main__":
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                a = pygame.Rect.collidepoint(event.pos)
+                collisions = [s for s in G_All if s.rect.collidepoint(event.pos)]
+                if not collisions == []:
+                    collisions[0].handleclick()
 
 
         viewport.fill(black)
